@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct Programming_AssignmentApp: App {
+    
+    init(){
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
