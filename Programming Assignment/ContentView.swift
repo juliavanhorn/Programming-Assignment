@@ -14,31 +14,41 @@ struct ContentView: View {
     @State var email = ""
     @State var password = ""
     @State var errorMessage = " \n "
-    @ObservedObject private var viewModel = ContactViewModel()
+    @ObservedObject private var viewModel = RecipeViewModel()
 
 
     var body: some View {
         if(loggedIn){
             NavigationView {
-                List(viewModel.contacts) { contact in
+                List(viewModel.recipes) { recipe in
                     VStack(alignment: .leading) {
-                        Text(contact.name ?? "Default").font(.title)
+                        Text(recipe.name ?? "Default").font(.title)
                     }
                 }.onAppear() {
-                    self.viewModel.fetchData()
+                    self.viewModel.fetchData(user: email)
                 }
-                .navigationTitle("Contacts")
+                .navigationTitle("Recipes")
                 .toolbar {
                     ToolbarItem(placement: .navigation) {
-                        Text("Navigation Bar")
+                        HStack {
+                            Text("Navigation Bar")
+                            Spacer()
+                            NavigationLink(destination: deviceContactsView()) {
+                                Label("+", systemImage: "apps.iphone")
+                            }
+                            Spacer()
+                            Button(action: { logout() }) {
+                                Text("Log out")
+                            }
+                        }
                     }
                     ToolbarItem(placement: .bottomBar) {
                         HStack {
-                            TextField("Enter your name", text: $name)
+                            TextField("Enter Recipe Name", text: $name)
                                 .frame(minWidth: 100, idealWidth: 150, maxWidth: 240, minHeight: 30, idealHeight: 40, maxHeight: 50, alignment: .leading)
                             Spacer()
                             Button(action: {
-                                self.viewModel.addData(name: name)
+                                self.viewModel.addData(name: name, user: email)
 
                             }) {
                                 Image(systemName: "plus")
@@ -90,14 +100,23 @@ struct ContentView: View {
         }
     }
     func login() {
-            Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-                if error != nil {
-                    errorMessage = error?.localizedDescription ?? ""
-                } else {
-                    loggedIn = true
-                }
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if error != nil {
+                errorMessage = error?.localizedDescription ?? ""
+            } else {
+                loggedIn = true
             }
         }
+    }
+
+    func logout() {
+        do {
+         try Auth.auth().signOut()
+            loggedIn = false
+        } catch {
+            print("unable to logout")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
