@@ -16,7 +16,7 @@ class RecipeViewModel: ObservableObject {
     
     func fetchData(user: String) {
         self.recipes = []
-        db.collection("contacts").addSnapshotListener { (querySnapshot, error) in
+        db.collection("recipes").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -28,19 +28,51 @@ class RecipeViewModel: ObservableObject {
                 var recipe = Recipe()
                 if(fetchedUser == user){
                     let name = data["name"] as? String ?? ""
+                    let ingred = data["ingred"] as? String ?? ""
+                    let instruc = data["instruc"] as? String ?? ""
+
                     recipe.name = name
+                    recipe.ingred = ingred
+                    recipe.instruc = instruc
+                    
                     self.recipes.append(recipe)
                 }
             }
         }
     }
-    func addData(name: String, user: String) {
-           do {
-            _ = try db.collection("contacts").addDocument(data: ["name": name, "user": user])
-           }
-           catch {
-                print("cant add new item")
-                print(error.localizedDescription)
-           }
-       }
+    func fetchSharedData(user: String) {
+        self.recipes = []
+        db.collection("recipes").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            for doc in documents {
+                let data = doc.data()
+                let fetchedUser = data["sharedTo"] as? String ?? ""
+                var recipe = Recipe()
+                if(fetchedUser == user){
+                    let name = data["name"] as? String ?? ""
+                    let ingred = data["ingred"] as? String ?? ""
+                    let instruc = data["instruc"] as? String ?? ""
+
+                    recipe.name = name
+                    recipe.ingred = ingred
+                    recipe.instruc = instruc
+                    
+                    self.recipes.append(recipe)
+                }
+            }
+        }
+    }
+    func addData(name: String, user: String, ingred: String, instruc: String, sharedTo: String) {
+        do {
+            _ = try db.collection("recipes").addDocument(data: ["name": name, "user": user, "instruc": instruc, "ingred": ingred, "sharedTo": sharedTo])
+        }
+        catch {
+            print("cant add new item")
+            print(error.localizedDescription)
+        }
+    }
 }

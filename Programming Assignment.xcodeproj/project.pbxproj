@@ -21,6 +21,10 @@
 		9287744B26E187F7002CA6BF /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9287744A26E187F7002CA6BF /* Recipe.swift */; };
 		9287744D26E18831002CA6BF /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9287744C26E18831002CA6BF /* RecipeViewModel.swift */; };
 		92BA4B7126E9621B0026B319 /* deviceContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BA4B7026E9621B0026B319 /* deviceContactsView.swift */; };
+		92BA4B7526EBF2530026B319 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BA4B7426EBF2530026B319 /* RecipeDetailView.swift */; };
+		92BA4B7726EC1A1C0026B319 /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BA4B7626EC1A1C0026B319 /* NewRecipeView.swift */; };
+		92BA4B7B26EC25790026B319 /* RecipeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BA4B7A26EC25790026B319 /* RecipeSearchView.swift */; };
+		92BA4B7D26EC350A0026B319 /* SharedRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BA4B7C26EC35090026B319 /* SharedRecipeView.swift */; };
 		F3365FCDA30E8CC80C5F5B34 /* Pods_Programming_AssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8AC965FF89AB9F82739FFA /* Pods_Programming_AssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +69,10 @@
 		9287744A26E187F7002CA6BF /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		9287744C26E18831002CA6BF /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		92BA4B7026E9621B0026B319 /* deviceContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deviceContactsView.swift; sourceTree = "<group>"; };
+		92BA4B7426EBF2530026B319 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		92BA4B7626EC1A1C0026B319 /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
+		92BA4B7A26EC25790026B319 /* RecipeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchView.swift; sourceTree = "<group>"; };
+		92BA4B7C26EC35090026B319 /* SharedRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedRecipeView.swift; sourceTree = "<group>"; };
 		E80AEF0226F5F125F4AB971A /* Pods-Programming AssignmentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Programming AssignmentTests.debug.xcconfig"; path = "Target Support Files/Pods-Programming AssignmentTests/Pods-Programming AssignmentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE46FC894BCDFC2AB584B425 /* Pods_Programming_Assignment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Programming_Assignment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -136,7 +144,11 @@
 			isa = PBXGroup;
 			children = (
 				9287741B26E17916002CA6BF /* Programming_AssignmentApp.swift */,
+				92BA4B7A26EC25790026B319 /* RecipeSearchView.swift */,
 				9287741D26E17916002CA6BF /* ContentView.swift */,
+				92BA4B7C26EC35090026B319 /* SharedRecipeView.swift */,
+				92BA4B7426EBF2530026B319 /* RecipeDetailView.swift */,
+				92BA4B7626EC1A1C0026B319 /* NewRecipeView.swift */,
 				92BA4B7026E9621B0026B319 /* deviceContactsView.swift */,
 				9287744A26E187F7002CA6BF /* Recipe.swift */,
 				9287744C26E18831002CA6BF /* RecipeViewModel.swift */,
@@ -425,10 +437,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9287744B26E187F7002CA6BF /* Recipe.swift in Sources */,
+				92BA4B7526EBF2530026B319 /* RecipeDetailView.swift in Sources */,
 				9287744D26E18831002CA6BF /* RecipeViewModel.swift in Sources */,
 				9287741E26E17916002CA6BF /* ContentView.swift in Sources */,
+				92BA4B7726EC1A1C0026B319 /* NewRecipeView.swift in Sources */,
 				9287741C26E17916002CA6BF /* Programming_AssignmentApp.swift in Sources */,
 				92BA4B7126E9621B0026B319 /* deviceContactsView.swift in Sources */,
+				92BA4B7B26EC25790026B319 /* RecipeSearchView.swift in Sources */,
+				92BA4B7D26EC350A0026B319 /* SharedRecipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

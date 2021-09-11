@@ -10,7 +10,7 @@ import Firebase
 
 struct ContentView: View {
     @State private var name: String = ""
-    @State var loggedIn: Bool = false
+    @State var loggedIn: Bool = true
     @State var email = ""
     @State var password = ""
     @State var errorMessage = " \n "
@@ -22,43 +22,32 @@ struct ContentView: View {
             NavigationView {
                 List(viewModel.recipes) { recipe in
                     VStack(alignment: .leading) {
-                        Text(recipe.name ?? "Default").font(.title)
+                        NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                            Text(recipe.name ?? "Default").font(.title)
+                        }
                     }
                 }.onAppear() {
                     self.viewModel.fetchData(user: email)
                 }
                 .navigationTitle("Recipes")
                 .toolbar {
-                    ToolbarItem(placement: .navigation) {
-                        HStack {
-                            Text("Navigation Bar")
-                            Spacer()
-                            NavigationLink(destination: deviceContactsView()) {
-                                Label("+", systemImage: "apps.iphone")
-                            }
-                            Spacer()
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: NewRecipeView(user: email)) {
+                            Label("+", systemImage: "plus")
+                        }
+                        
+                    }
+                    ToolbarItem(placement: .bottomBar){
+                        HStack{
                             Button(action: { logout() }) {
                                 Text("Log out")
                             }
-                        }
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        HStack {
-                            TextField("Enter Recipe Name", text: $name)
-                                .frame(minWidth: 100, idealWidth: 150, maxWidth: 240, minHeight: 30, idealHeight: 40, maxHeight: 50, alignment: .leading)
-                            Spacer()
-                            Button(action: {
-                                self.viewModel.addData(name: name, user: email)
-
-                            }) {
-                                Image(systemName: "plus")
-                                    //.font(.title)
+                            NavigationLink(destination: RecipeSearchView()) {
+                                Label("Search", systemImage: "magnifyingglass")
                             }
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.blue)
-                            .cornerRadius(20)
-                            //Spacer()
+                            NavigationLink(destination: SharedRecipeView(user: email)) {
+                                Label("Shared", systemImage: "person.2.fill")
+                            }
                         }
                     }
                     

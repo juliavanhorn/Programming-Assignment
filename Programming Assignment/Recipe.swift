@@ -13,6 +13,8 @@ struct Recipe: Codable, Identifiable {
     var user: String?
     var instruc: String?
     var ingred: String?
+    var sharedTo: String?
+
     init() {
         self.id = UUID().uuidString
         self.name = ""
