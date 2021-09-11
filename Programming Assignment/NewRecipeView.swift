@@ -26,7 +26,8 @@ struct NewRecipeView: View {
             TextEditor(text: $ingred)
             Text("Instructions")
             TextEditor(text: $instruc)
-            TextField("Share to: (Enter user's email)", text: $sharedTo)
+            Text("Share")
+            TextField("Enter user's email to share recipe", text: $sharedTo)
             Button(action: { viewModel.addData(name: name, user: user, ingred: ingred, instruc: instruc, sharedTo: sharedTo) }) {
                 Text("Save")
             }

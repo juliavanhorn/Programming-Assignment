@@ -16,11 +16,33 @@ struct RecipeDetailView: View {
     
     var body: some View {
         VStack{
-            Text(recipe.name ?? "")
-            Text("Ingredients")
-            Text(recipe.ingred ?? "")
-            Text("Instructions")
-            Text(recipe.instruc ?? "")
+            HStack{
+                Text(recipe.name ?? "")
+                    .font(.title)
+                Spacer()
+            }
+            Spacer()
+            HStack{
+                Text("Ingredients")
+                    .font(.title2)
+                Spacer()
+            }
+            HStack{
+                Text(recipe.ingred ?? "")
+                Spacer()
+            }
+            Spacer()
+            HStack{
+                Text("Instructions")
+                    .font(.title2)
+                Spacer()
+            }
+            HStack{
+                Text(recipe.instruc ?? "")
+                Spacer()
+            }
+            Spacer()
         }
+        .padding()
     }
 }

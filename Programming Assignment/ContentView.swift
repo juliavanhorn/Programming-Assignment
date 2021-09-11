@@ -20,15 +20,19 @@ struct ContentView: View {
     var body: some View {
         if(loggedIn){
             NavigationView {
-                List(viewModel.recipes) { recipe in
-                    VStack(alignment: .leading) {
-                        NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                            Text(recipe.name ?? "Default").font(.title)
+                //List(viewModel.recipes) { recipe in
+                List {
+                    ForEach(viewModel.recipes) { recipe in
+                        VStack(alignment: .leading) {
+                            NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                                Text(recipe.name ?? "Default").font(.title)
+                            }
                         }
                     }
                 }.onAppear() {
                     self.viewModel.fetchData(user: email)
                 }
+                
                 .navigationTitle("Recipes")
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -42,12 +46,14 @@ struct ContentView: View {
                             Button(action: { logout() }) {
                                 Text("Log out")
                             }
-                            NavigationLink(destination: RecipeSearchView()) {
-                                Label("Search", systemImage: "magnifyingglass")
-                            }
+                            .offset(x:-50)
                             NavigationLink(destination: SharedRecipeView(user: email)) {
                                 Label("Shared", systemImage: "person.2.fill")
                             }
+                            NavigationLink(destination: RecipeSearchView()) {
+                                Label("Search", systemImage: "magnifyingglass")
+                            }
+                            .offset(x: 50)
                         }
                     }
                     
