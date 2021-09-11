@@ -16,6 +16,7 @@ struct ContentView: View {
     @State var email = ""
     @State var password = ""
     @State var errorMessage = " \n "
+
     @ObservedObject private var viewModel = RecipeViewModel()
 
 
@@ -58,7 +59,7 @@ struct ContentView: View {
                 
                 .navigationTitle("Recipes")
                 .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink(destination: NewRecipeView(user: email)) {
                             Label("+", systemImage: "plus")
                         }
@@ -66,18 +67,13 @@ struct ContentView: View {
                     }
                     ToolbarItem(placement: .bottomBar){
                         HStack{
-                            NavigationLink(destination: SettingsView()) {
-                                Label("Settings", systemImage: "gearshape")
-                            }
-                            .offset(x:-50)
                             Button(action: { logout() }) {
                                 Text("Log out")
                             }
-                            .offset(x:-10)
+                            .offset(x:-50)
                             NavigationLink(destination: SharedRecipeView(user: email)) {
                                 Label("Shared", systemImage: "person.2.fill")
                             }
-                            .offset(x:10)
                             NavigationLink(destination: RecipeSearchView()) {
                                 Label("Search", systemImage: "magnifyingglass")
                             }

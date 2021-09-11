@@ -19,17 +19,21 @@ struct NewRecipeView: View {
 
     
     var body: some View {
-        VStack{
-            Text("New Recipe")
-            TextField("Recipe Name", text: $name)
-            Text("Ingredients")
-            TextEditor(text: $ingred)
-            Text("Instructions")
-            TextEditor(text: $instruc)
-            Text("Share")
-            TextField("Enter user's email to share recipe", text: $sharedTo)
-            Button(action: { viewModel.addData(name: name, user: user, ingred: ingred, instruc: instruc, sharedTo: sharedTo) }) {
-                Text("Save")
+        NavigationView{
+            VStack{
+                Text("New Recipe")
+                TextField("Recipe Name", text: $name)
+                Text("Ingredients")
+                TextEditor(text: $ingred)
+                Text("Instructions")
+                TextEditor(text: $instruc)
+                Text("Share")
+                TextField("Enter user's email to share recipe", text: $sharedTo)
+                Button(action: {
+                    viewModel.addData(name: name, user: user, ingred: ingred, instruc: instruc, sharedTo: sharedTo)
+                }) {
+                    Text("Save")
+                }
             }
         }
     }
