@@ -7,10 +7,12 @@
 
 import SwiftUI
 import Firebase
+import UserNotifications
+
 
 struct ContentView: View {
     @State private var name: String = ""
-    @State var loggedIn: Bool = true
+    @State var loggedIn: Bool = false
     @State var email = ""
     @State var password = ""
     @State var errorMessage = " \n "
@@ -31,6 +33,27 @@ struct ContentView: View {
                     }
                 }.onAppear() {
                     self.viewModel.fetchData(user: email)
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            print("All set!")
+                            let content = UNMutableNotificationContent()
+                            content.title = "Recipe of the Day"
+                            content.subtitle = "Click to View"
+                            content.sound = UNNotificationSound.default
+                            var dateComponents = DateComponents()
+                            dateComponents.hour = 9
+                            dateComponents.minute = 0
+                            //set hour and minute to test notifications
+                            //currently set to notify at 9:00AM every day
+                            
+                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                            UNUserNotificationCenter.current().add(request)
+                        } else if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        
+                    }
                 }
                 
                 .navigationTitle("Recipes")
@@ -43,17 +66,22 @@ struct ContentView: View {
                     }
                     ToolbarItem(placement: .bottomBar){
                         HStack{
+                            NavigationLink(destination: SettingsView()) {
+                                Label("Settings", systemImage: "gearshape")
+                            }
+                            .offset(x:-50)
                             Button(action: { logout() }) {
                                 Text("Log out")
                             }
-                            .offset(x:-50)
+                            .offset(x:-10)
                             NavigationLink(destination: SharedRecipeView(user: email)) {
                                 Label("Shared", systemImage: "person.2.fill")
                             }
+                            .offset(x:10)
                             NavigationLink(destination: RecipeSearchView()) {
                                 Label("Search", systemImage: "magnifyingglass")
                             }
-                            .offset(x: 50)
+                            .offset(x:50)
                         }
                     }
                     
