@@ -16,6 +16,7 @@ struct ContentView: View {
     @State var email = ""
     @State var password = ""
     @State var errorMessage = " \n "
+    @State var firstLogin = true
 
     @ObservedObject private var viewModel = RecipeViewModel()
 
@@ -37,19 +38,22 @@ struct ContentView: View {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                         if success {
                             print("All set!")
-                            let content = UNMutableNotificationContent()
-                            content.title = "Recipe of the Day"
-                            content.subtitle = "Click to View"
-                            content.sound = UNNotificationSound.default
-                            var dateComponents = DateComponents()
-                            dateComponents.hour = 9
-                            dateComponents.minute = 0
-                            //set hour and minute to test notifications
-                            //currently set to notify at 9:00AM every day
-                            
-                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                            UNUserNotificationCenter.current().add(request)
+                            if(firstLogin){
+                                self.firstLogin = false
+                                let content = UNMutableNotificationContent()
+                                content.title = "Recipe of the Day"
+                                content.subtitle = "Click to View"
+                                content.sound = UNNotificationSound.default
+                                var dateComponents = DateComponents()
+                                dateComponents.hour = 9
+                                dateComponents.minute = 13
+                                //set hour and minute to test notifications
+                                //currently set to notify at 9:00AM every day
+                                
+                                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                                UNUserNotificationCenter.current().add(request)
+                            }
                         } else if let error = error {
                             print(error.localizedDescription)
                         }
