@@ -59,12 +59,6 @@ struct ContentView: View {
                 
                 .navigationTitle("Recipes")
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: NewRecipeView(user: email)) {
-                            Label("+", systemImage: "plus")
-                        }
-                        
-                    }
                     ToolbarItem(placement: .bottomBar){
                         HStack{
                             Button(action: { logout() }) {
@@ -80,7 +74,12 @@ struct ContentView: View {
                             .offset(x:50)
                         }
                     }
-                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: NewRecipeView(user: email)) {
+                            Label("New Recipe", systemImage: "plus")
+                        }
+                        
+                    }
                 }
             }
         }else{

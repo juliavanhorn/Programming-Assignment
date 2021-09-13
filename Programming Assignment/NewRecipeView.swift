@@ -19,19 +19,23 @@ struct NewRecipeView: View {
 
     
     var body: some View {
-        NavigationView{
+        ScrollView{
+            //ZStack{
+                //Color(red:219,green:219,blue:219)
             VStack{
-                Text("New Recipe")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 TextField("Recipe Name", text: $name)
+                    .font(.title2)
+                    //.padding()
                 Text("Ingredients")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title3)
                 TextEditor(text: $ingred)
+                    .frame(height:200)
                 Text("Instructions")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title3)
                 TextEditor(text: $instruc)
+                    .frame(height:200)
                 Text("Share")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title3)
                 TextField("Enter user's email to share recipe", text: $sharedTo)
                 Button(action: {
                     viewModel.addData(name: name, user: user, ingred: ingred, instruc: instruc, sharedTo: sharedTo)
@@ -39,6 +43,9 @@ struct NewRecipeView: View {
                     Text("Save")
                 }
             }
+            .navigationBarTitle("New Recipe")
+            .padding()
+            //}
         }
     }
 }

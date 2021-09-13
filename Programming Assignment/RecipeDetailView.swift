@@ -10,7 +10,6 @@ import SwiftUI
 struct RecipeDetailView: View {
     var recipe: Recipe
     
-    @State var instructions = "Instructions"
     @ObservedObject private var viewModel = RecipeViewModel()
 
     

@@ -13,14 +13,17 @@ struct SharedRecipeView: View {
 
     
     var body: some View {
-        List(viewModel.recipes) { recipe in
-            VStack(alignment: .leading) {
-                NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                    Text(recipe.name ?? "Default").font(.title)
+        //NavigationView {
+            List(viewModel.recipes) { recipe in
+                VStack(alignment: .leading) {
+                    NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                        Text(recipe.name ?? "Default").font(.title)
+                    }
                 }
+            }.onAppear() {
+                self.viewModel.fetchSharedData(user: user)
             }
-        }.onAppear() {
-            self.viewModel.fetchSharedData(user: user)
-        }
+                .navigationBarTitle("Shared Recipes")
+        //}
     }
 }
